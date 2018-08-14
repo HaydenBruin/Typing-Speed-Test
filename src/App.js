@@ -8,7 +8,6 @@ class App extends Component {
         return (
             <div className="section words">
                 <h1>Speed typing test</h1>
-                <p>Click the button below to get started</p>
 
                 <TypingTest />
             </div>
