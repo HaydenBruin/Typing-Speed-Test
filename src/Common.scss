@@ -1,3 +1,13 @@
-body {
-    background: #333;
+.section.words {
+    text-align: center;
+    padding-top: 200px;
+
+    .test {
+        display: none;
+
+        &.active {
+            display: block;
+            background: #eee;
+        }
+    }
 }
