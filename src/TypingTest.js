@@ -50,10 +50,6 @@ export default class TypingTest extends Component {
 
     countdownTimer = null;
 
-    handleKeyPress = (e) => {
-        console.log(e);
-    }
-
     getRandomWord = () => {
         return this.words[Math.floor(Math.random() * this.words.length)];
     }
@@ -105,6 +101,14 @@ export default class TypingTest extends Component {
         })
     }
 
+    //  DETECT IF SPACE IS PRESSED
+    handleKeyPress = (e) => {
+        if(e.keyCode === 32)
+        {
+            this.checkWord(e);
+        }
+    }
+
     // CHECK THE WORD IS CORRECT
     checkWord = (e) => {
         e.preventDefault();
@@ -139,7 +143,7 @@ export default class TypingTest extends Component {
                         <span className="next">{this.state.words.nextWord}</span>
                     </div>
 
-                    <input autoFocus type="text" placeholder="Type word here" value={this.state.typedWord} onChange={(e) => this.handleTypingWord(e)} onKeyPress={(e) => this.handleKeyPress(e)} />
+                    <input autoFocus type="text" placeholder="Type word here" value={this.state.typedWord} onChange={(e) => this.handleTypingWord(e)} onKeyDown={(e) => this.handleKeyPress(e)} />
 
                     <div className="answers">Correct: <strong>{this.state.answers.correct}</strong> - Wrong: <strong>{this.state.answers.wrong}</strong></div>
                 </form>
