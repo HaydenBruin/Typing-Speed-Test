@@ -51,10 +51,13 @@ export default class TypingTest extends Component {
     countdownTimer = null;
 
     componentDidMount() {
-        
-        this.nv.addEventListener("nv-enter", this.handleNvEnter);
+        this.addEventListener("FormSubmit", this.handleFormSubmit);
     }
     componentWillUnmount() {
+
+    }
+
+    handleFormSubmit = () => {
 
     }
 
