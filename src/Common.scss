@@ -1,13 +1,92 @@
+$black: #424242;
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: $black;
+    background: #f2f4f8;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 42px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+p {
+    color: $black;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: normal;
+
+    &.large {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+}
+
+button, .button {
+    background: $black;
+    border: 0px;
+    border-radius: 5px;
+    padding: 15px 30px;
+    color: #FFF;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+
+    &:hover {
+        background: #333;
+    }
+}
+
 .section.words {
     text-align: center;
-    padding-top: 200px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    .test {
-        display: none;
+    .typingtest {
+        width: 400px;
+        max-width: 100%;
 
-        &.active {
-            display: block;
-            background: #eee;
+        input[type=text] {
+            height: 40px;
+            border: 2px solid #eee;
+            background: #FFF;
+            color: #888;
+            width: 100%;
+            max-width: 300px;
+            font-size: 16px;
+            padding: 0px 15px;
+
+            &:focus {
+                outline: 0;
+            }
+        }
+
+        .words {
+            margin-bottom: 30px;
+
+            .current {
+                font-size: 22px;
+                margin: 0px 15px;
+                vertical-align: middle;
+            }
+            .next {
+                opacity: 0.6;
+                margin: 0px 15px;
+                font-size: 14px;
+                vertical-align: middle;
+            }
+        }
+
+        .answers {
+            margin-top: 30px;
+            font-size: 16px;
+            border-top: 1px solid #ccc;
+            padding-top: 30px;
         }
     }
 }

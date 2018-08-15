@@ -29,7 +29,7 @@ export default class TypingTest extends Component {
 
     // DEFAULT SETTINGS
     defaultSettings = {
-        testSeconds: 10
+        testSeconds: 5
     }
 
     state = {
@@ -43,7 +43,8 @@ export default class TypingTest extends Component {
             correct: 0,
             wrong: 0
         },
-        startedTest: false
+        startedTest: false,
+        finishedTest: false
     }
 
     countdownTimer = null;
@@ -85,7 +86,8 @@ export default class TypingTest extends Component {
         clearInterval(this.countdownTimer);
 
         this.setState({
-            startedTest: false
+            startedTest: false,
+            finishedTest: true
         })
     }
 
@@ -124,16 +126,28 @@ export default class TypingTest extends Component {
         if(this.state.startedTest)
         {
             return (
-                <Fragment>
-                    <h1>Countdown: {this.state.countdown}</h1>
-                    <p>Correct Answers: {this.state.answers.correct}</p>
-                    <p>Wrong Answers: {this.state.answers.wrong}</p>
+                <form action="?" onSubmit={(e) => this.checkWord(e)}>
+                    <h1>{this.state.countdown} seconds left</h1>
+                    <div className="words">
+                        <span className="current">{this.state.words.currentWord}</span>
+                        <span className="next">{this.state.words.nextWord}</span>
+                    </div>
 
-                    <form action="?" onSubmit={(e) => this.checkWord(e)}>
-                        <h1>{this.state.words.currentWord}</h1>
-                        <h3>{this.state.words.nextWord}</h3>
-                        <input autoFocus type="text" placeholder="Type word here" value={this.state.typedWord} onChange={(e) => this.handleTypingWord(e)} />
-                    </form>
+                    <input autoFocus type="text" placeholder="Type word here" value={this.state.typedWord} onChange={(e) => this.handleTypingWord(e)} />
+
+                    <div className="answers">Correct: <strong>{this.state.answers.correct}</strong> - Wrong: <strong>{this.state.answers.wrong}</strong></div>
+                </form>
+            )
+        }
+        else if(this.state.finishedTest)
+        {
+            return (
+                <Fragment>
+                    <h1>Well done!</h1>
+                    <p className="large">Click the button to take the test again</p>
+                    <button onClick={() => this.startTest()}>Start Again</button>
+
+                    <div className="answers">Correct: <strong>{this.state.answers.correct}</strong> - Wrong: <strong>{this.state.answers.wrong}</strong></div>
                 </Fragment>
             )
         }
@@ -141,11 +155,11 @@ export default class TypingTest extends Component {
         {
             return (
                 <Fragment>
-                    <p>Click the button below to get started</p>
+                    <h1>Speed typing test</h1>
+                    <p className="large">Click the button below to get started</p>
                     <button onClick={() => this.startTest()}>Start Test</button>
 
-                    <p>Correct Answers: {this.state.answers.correct}</p>
-                    <p>Wrong Answers: {this.state.answers.wrong}</p>
+                    <div className="answers">Correct: <strong>{this.state.answers.correct}</strong> - Wrong: <strong>{this.state.answers.wrong}</strong></div>
                 </Fragment>
             )
         }

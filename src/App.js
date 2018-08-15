@@ -7,9 +7,9 @@ class App extends Component {
     render() {
         return (
             <div className="section words">
-                <h1>Speed typing test</h1>
-
-                <TypingTest />
+              <div className="typingtest">
+                  <TypingTest />
+                </div>
             </div>
         );
     }
