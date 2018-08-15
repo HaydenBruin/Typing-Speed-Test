@@ -29,15 +29,16 @@ export default class TypingTest extends Component {
 
     // DEFAULT SETTINGS
     defaultSettings = {
-        testSeconds: 5
+        testSeconds: 15
     }
 
     state = {
         countdown: this.defaultSettings.testSeconds,
         typedWord: "",
+        wpm: 0,
         words: {
             currentWord: "",
-            nextWord: "",
+            nextWord: ""
         },
         answers: {
             correct: 0,
@@ -58,6 +59,7 @@ export default class TypingTest extends Component {
             countdown: this.defaultSettings.testSeconds,
             startedTest: true,
             typedWord: "",
+            wpm: 0,
             answers: {
                 correct: 0,
                 wrong: 0
