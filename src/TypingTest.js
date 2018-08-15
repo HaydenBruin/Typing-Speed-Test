@@ -50,6 +50,14 @@ export default class TypingTest extends Component {
 
     countdownTimer = null;
 
+    componentDidMount() {
+        
+        this.nv.addEventListener("nv-enter", this.handleNvEnter);
+    }
+    componentWillUnmount() {
+
+    }
+
     getRandomWord = () => {
         return this.words[Math.floor(Math.random() * this.words.length)];
     }
