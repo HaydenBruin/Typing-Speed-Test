@@ -29,7 +29,8 @@ export default class TypingTest extends Component {
 
     // DEFAULT SETTINGS
     defaultSettings = {
-        testSeconds: 15
+        testSeconds: 15,
+        maxWords: 100
     }
 
     state = {
@@ -53,7 +54,7 @@ export default class TypingTest extends Component {
 
     getRandomWords = () => {
         const words = [];
-        for(var i = 0; i < 20; i++)
+        for(var i = 0; i < this.defaultSettings.maxWords; i++)
         {
             words[i] = this.getRandomWord();
         }
@@ -61,6 +62,7 @@ export default class TypingTest extends Component {
     }
 
     startTest = () => {
+        const testWords = this.getRandomWords();
         this.setState({
             countdown: this.defaultSettings.testSeconds,
             startedTest: true,
@@ -70,7 +72,8 @@ export default class TypingTest extends Component {
                 correct: 0,
                 wrong: 0
             },
-            words: this.getRandomWords()
+            words: testWords,
+            currentWord: 0
         })
 
         // START COUNTDOWN TIMER
@@ -119,7 +122,7 @@ export default class TypingTest extends Component {
         var correct = this.state.answers.correct;
         var wrong = this.state.answers.wrong;
 
-        if(this.state.typedWord.toLowerCase() === this.state.words[0].toLowerCase()) correct++;
+        if(this.state.typedWord.toLowerCase() === this.state.words[this.state.currentWord].toLowerCase()) correct++;
             else wrong++;
         
         this.setState({
@@ -127,7 +130,7 @@ export default class TypingTest extends Component {
                 correct: correct,
                 wrong: wrong
             },
-            words: this.getRandomWords(),
+            currentWord: this.state.currentWord + 1,
             typedWord: ""
         })
     }
@@ -141,7 +144,7 @@ export default class TypingTest extends Component {
                     <div className="words">
                         {
                             this.state.words.map((word, index) => {
-                                return <div className="word" key={index}>{word}</div>
+                                return <div className={this.state.currentWord === index ? "word active" : "word"} key={index}>{word}</div>
                             })
                         }
                     </div>
