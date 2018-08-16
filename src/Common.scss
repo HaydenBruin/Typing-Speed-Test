@@ -68,17 +68,19 @@ button, .button {
 
         .words {
             margin-bottom: 30px;
+            display: block;
+            word-wrap: break-word;
 
-            .current {
-                font-size: 22px;
-                margin: 0px 15px;
-                vertical-align: middle;
-            }
-            .next {
+            .word {
                 opacity: 0.6;
-                margin: 0px 15px;
+                margin-right: 5px;
                 font-size: 14px;
-                vertical-align: middle;
+                display: inline-block;
+
+                &.active {
+                    opacity: 1;
+                    font-size: 22px;
+                }
             }
         }
 

@@ -36,10 +36,7 @@ export default class TypingTest extends Component {
         countdown: this.defaultSettings.testSeconds,
         typedWord: "",
         wpm: 0,
-        words: {
-            currentWord: "",
-            nextWord: ""
-        },
+        words: [],
         answers: {
             correct: 0,
             wrong: 0
@@ -54,6 +51,15 @@ export default class TypingTest extends Component {
         return this.words[Math.floor(Math.random() * this.words.length)];
     }
 
+    getRandomWords = () => {
+        const words = [];
+        for(var i = 0; i < 20; i++)
+        {
+            words[i] = this.getRandomWord();
+        }
+        return words;
+    }
+
     startTest = () => {
         this.setState({
             countdown: this.defaultSettings.testSeconds,
@@ -64,10 +70,7 @@ export default class TypingTest extends Component {
                 correct: 0,
                 wrong: 0
             },
-            words: {
-                currentWord: this.getRandomWord(),
-                nextWord: this.getRandomWord(),
-            }
+            words: this.getRandomWords()
         })
 
         // START COUNTDOWN TIMER
@@ -116,7 +119,7 @@ export default class TypingTest extends Component {
         var correct = this.state.answers.correct;
         var wrong = this.state.answers.wrong;
 
-        if(this.state.typedWord.toLowerCase() === this.state.words.currentWord.toLowerCase()) correct++;
+        if(this.state.typedWord.toLowerCase() === this.state.words[0].toLowerCase()) correct++;
             else wrong++;
         
         this.setState({
@@ -124,10 +127,7 @@ export default class TypingTest extends Component {
                 correct: correct,
                 wrong: wrong
             },
-            words: {
-                currentWord: this.state.words.nextWord,
-                nextWord: this.getRandomWord()
-            },
+            words: this.getRandomWords(),
             typedWord: ""
         })
     }
@@ -139,8 +139,11 @@ export default class TypingTest extends Component {
                 <form action="?" onSubmit={(e) => this.checkWord(e)}>
                     <h1>{this.state.countdown} seconds left</h1>
                     <div className="words">
-                        <span className="current">{this.state.words.currentWord}</span>
-                        <span className="next">{this.state.words.nextWord}</span>
+                        {
+                            this.state.words.map((word, index) => {
+                                return <div className="word" key={index}>{word}</div>
+                            })
+                        }
                     </div>
 
                     <input autoFocus type="text" placeholder="Type word here" value={this.state.typedWord} onChange={(e) => this.handleTypingWord(e)} onKeyDown={(e) => this.handleKeyPress(e)} />
