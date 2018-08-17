@@ -173,7 +173,17 @@ export default class TypingTest extends Component {
             {
                 return (
                     <Fragment>
-                        {this.state.testStart}
+                        <h1>Test starting in {this.state.testStart}</h1>
+                        <div className="words">
+                            {
+                                this.state.words.map((word, index) => {
+                                    return <div className={this.state.currentWord === index ? "word active" : "word"} key={index}>{word}</div>
+                                })
+                            }
+                        </div>
+                        
+                        <input autoFocus disabled type="text" placeholder="Type your words here" />
+
                     </Fragment>
                 );
             }
