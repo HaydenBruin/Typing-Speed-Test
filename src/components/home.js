@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import TypingTest from "./typing-test";
 
-class App extends Component {
+class Home extends Component {
 
     render() {
         return (
@@ -20,4 +20,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Home;

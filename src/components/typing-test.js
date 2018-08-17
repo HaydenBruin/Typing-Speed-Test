@@ -50,10 +50,15 @@ export default class TypingTest extends Component {
 
     countdownTimer = null;
 
+    // FUNC: getRandomWord()
+    // SELECT A RANDOM NUMBER BETWEEN 0 & THE AMOUNT OF WORDS LISTED IN THE WORDS ARRAY.
+    // USES THAT RANDOM NUMBER TO SELECT AN ARRAY ITEM
     getRandomWord = () => {
         return this.words[Math.floor(Math.random() * this.words.length)];
     }
 
+    // FUNC: getRandomWords()
+    // USED TO GENERATE AN ARRAY OF WORDS TO TYPE - USES THE getRandomWord() FUNCTION TO ASSIGN EACH ARRAY ITEM
     getRandomWords = () => {
         const words = [];
         for(var i = 0; i < this.defaultSettings.maxWords; i++)
@@ -63,6 +68,9 @@ export default class TypingTest extends Component {
         return words;
     }
 
+    // FUNC: startTest()
+    // FUNCTION IS CALLED WHEN THE 'START TEST' BUTTON IS CLICKED
+    // WILL DO A 3 SECOND COUNTDOWN THEN IT WILL START THE TEST
     startTest = () => {
         const testWords = this.getRandomWords();
         this.setState({
@@ -102,6 +110,9 @@ export default class TypingTest extends Component {
         }, 1000);
     }
 
+    // FUNC: finishTest()
+    // CALLED WHEN THE TEST COUNTDOWN HAS FINISHED
+    // DELETES THE TIMER & CHANGES STATE TO SAY THE TEST HAS FINISHED
     finishTest = () => {
         clearInterval(this.countdownTimer);
 
@@ -112,14 +123,17 @@ export default class TypingTest extends Component {
     }
 
 
-    // UPDATE STATE VALUE TYPED WORD
+    // FUNC: handleTypingWord
+    // UPDATES THE WORD INPUT FIELD AND CHANGES THE STATE
     handleTypingWord = (e) => {
         this.setState({
             typedWord: e.target.value
         })
     }
 
-    //  DETECT IF SPACE IS PRESSED
+    // FUNC: handleKeyPress
+    // EVENT LISTENER FOR ONKEYPRESS - CHECKS TO SEE IF THE KEY IS SPACE BAR
+    // SPACE BAR IS USED TO MOVE ONTO THE NEXT WORD (JUST LIKE ENTER)
     handleKeyPress = (e) => {
         if(e.keyCode === 32)
         {
@@ -127,7 +141,9 @@ export default class TypingTest extends Component {
         }
     }
 
-    // CHECK THE WORD IS CORRECT
+    // FUNC: checkWord()
+    // CHECKS THE INPUT FIELD TO SEE IF THE WORD MATCHES THE CURRENT ACTIVE WORD
+    // IF WORD IS CORRECT/WRONG UPDATES THE VALUE TO +1
     checkWord = (e) => {
         e.preventDefault();
 
@@ -147,10 +163,33 @@ export default class TypingTest extends Component {
         })
     }
 
+    // RENDER THE TYPING TEST DEPENDING ON VARIOUS STATES
+    // 1: RUN THE STARTER COUNTDOWN
+    // 2: IF THE TEST HAS STARTED & THE STARTER COUNTDOWN HAS FINISHED
+    // 3: DISPLAYS WHEN THE TEST HAS BEEN FINISHED
+    // 4 INITIAL STATE - TEST HASN'T BEEN STARTED BEFORE
     render() {
         if(this.state.startedTest)
         {
-            if(this.state.testStart === 0)
+            if(this.state.testStart !== 0)
+            {
+                return (
+                    <Fragment>
+                        <h1>Test starting in {this.state.testStart}</h1>
+                        <div className="words">
+                            {
+                                this.state.words.map((word, index) => {
+                                    return <div className={this.state.currentWord === index ? "word active" : "word"} key={index}>{word}</div>
+                                })
+                            }
+                        </div>
+                        
+                        <input autoFocus type="text" placeholder="Type your words here" />
+
+                    </Fragment>
+                );
+            }
+            else
             {
                 return (
                     <form action="?" onSubmit={(e) => this.checkWord(e)}>
@@ -168,24 +207,6 @@ export default class TypingTest extends Component {
                         <div className="answers">Correct: <strong>{this.state.answers.correct}</strong> - Wrong: <strong>{this.state.answers.wrong}</strong></div>
                     </form>
                 )
-            }
-            else
-            {
-                return (
-                    <Fragment>
-                        <h1>Test starting in {this.state.testStart}</h1>
-                        <div className="words">
-                            {
-                                this.state.words.map((word, index) => {
-                                    return <div className={this.state.currentWord === index ? "word active" : "word"} key={index}>{word}</div>
-                                })
-                            }
-                        </div>
-                        
-                        <input autoFocus type="text" placeholder="Type your words here" />
-
-                    </Fragment>
-                );
             }
         }
         else if(this.state.finishedTest)
