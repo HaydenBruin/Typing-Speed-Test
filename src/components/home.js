@@ -1,6 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import TypingTest from "./TypingTest";
-import './App.scss';
+import TypingTest from "./typing-test";
 
 class App extends Component {
 

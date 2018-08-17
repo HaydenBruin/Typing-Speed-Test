@@ -182,7 +182,7 @@ export default class TypingTest extends Component {
                             }
                         </div>
                         
-                        <input autoFocus disabled type="text" placeholder="Type your words here" />
+                        <input autoFocus type="text" placeholder="Type your words here" />
 
                     </Fragment>
                 );
