@@ -1,0 +1,33 @@
+.main.columns {
+    display: flex;
+
+    .column.test {
+        flex: 1;
+    }
+    .column.history {
+        flex: 0 0 300px;
+        border-left: 1px solid #eee;
+        background: #FFF;
+
+        h2 {
+            padding: 0px 15px;
+        }
+
+        .tests {
+            border-top: 1px solid #eee;
+        }
+        .test {
+            border-bottom: 1px solid #eee;
+            padding: 10px 15px;
+
+            .title {
+                font-size: 14px;
+                color: #303030;
+            }
+            .desc {
+                font-size: 12px;
+                color: #888;
+            }
+        }
+    }
+}
