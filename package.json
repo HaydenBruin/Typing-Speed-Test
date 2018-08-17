@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "react-redux": "^5.0.7",
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
@@ -93,6 +96,7 @@
   },
   "devDependencies": {
     "node-sass": "^4.9.3",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "redux-devtools": "^3.4.1"
   }
 }
