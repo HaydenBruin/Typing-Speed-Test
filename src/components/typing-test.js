@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react'
-import { addTestResult } from '../actions/test-history';
 
 export default class TypingTest extends Component {
     // WORDS
@@ -121,8 +120,6 @@ export default class TypingTest extends Component {
             startedTest: false,
             finishedTest: true
         })
-
-        this.props.dispatch( addTestResult(this.state.correct, this.state.wrong) )
     }
 
 

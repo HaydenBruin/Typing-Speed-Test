@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
-import { connect } from 'react-redux';
 import TypingTest from "./typing-test";
 import Icon from "./icon";
+import { createStore } from 'redux';
 
 class Home extends Component {
 
@@ -43,8 +43,42 @@ class Home extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-  
+export default Home;
+
+// default reducers
+const defaultState = {
+    testHistory: []
+}
+
+// set reducers
+const testHistory = (state = defaultState, action) => {
+    switch(action.type)
+    {
+        case 'UPDATE_TESTHISTORY':
+            return { ...state, testHistory: { correct: action.correct, wrong: action.wrong } }
+        default:
+            return state;
+    }
+}
+
+// create store
+const store = createStore(testHistory);
+
+console.log(store.getState());
+
+// disptach actions
+store.dispatch({
+    type: 'UPDATE_TESTHISTORY',
+    correct: 8,
+    wrong: 1
 })
 
-export default connect(mapStateToProps)(Home)
+console.log(store.getState());
+store.dispatch({
+    type: 'UPDATE_TESTHISTORY',
+    correct: 4,
+    wrong: 3
+})
+
+
+console.log(store.getState());
