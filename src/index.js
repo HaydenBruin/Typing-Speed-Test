@@ -12,14 +12,12 @@ import Home from './components/home';
 // LOAD STYLES
 import "./scss/_load.scss";
 
-// CREATE STORE
-const hello = () => ('hello');
-const store = createStore(hello);
-console.log(store.getState());
+// ROOT REDUCER
+import rootReducer from "./reducers";
 
 // RENDER
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={rootReducer}>
         <Home />
     </Provider>,
 document.getElementById('root'));
