@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 class Home extends Component {
 
     render() {
+        console.log(this.props.testHistory);
         return (
             <Fragment>
                 <div className="main columns">
@@ -17,12 +18,14 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="column history">
-                        <h2>Test Feed</h2>
-                        <div className="tests">
-                            { this.props.testHistory && <TestHistory history={this.props.testHistory} /> }
+                    { this.props.testHistory.length > 0 && 
+                        <div className="column history">
+                            <h2>Test Feed</h2>
+                            <div className="tests">
+                                <TestHistory history={this.props.testHistory} />
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
 
                 <footer>
@@ -38,4 +41,3 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps)(Home)
-

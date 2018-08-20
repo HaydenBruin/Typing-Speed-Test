@@ -1,7 +1,8 @@
 import React, { Fragment, Component } from 'react';
 import { updateTestHistory } from "../actions/test-history";
+import { connect } from 'react-redux';
 
-export default class TypingTest extends Component {
+class TypingTest extends Component {
     // WORDS
     words = [
         "open","seem","together","next","white","children","begin","got","walk","example","ease","paper","group","always","music","those","both","mark","often","letter","until","mile",
@@ -122,7 +123,7 @@ export default class TypingTest extends Component {
             finishedTest: true
         })
 
-        store.dispatch(updateTestHistory(this.state.answers.correct, this.state.answers.wrong))
+        this.props.dispatch(updateTestHistory(this.state.answers.correct, this.state.answers.wrong))
     }
 
 
@@ -238,3 +239,10 @@ export default class TypingTest extends Component {
         }
     }
 }
+
+
+const mapStateToProps = (state) => ({
+    testHistory: state.testHistory.tests
+})
+
+export default connect(mapStateToProps)(TypingTest)

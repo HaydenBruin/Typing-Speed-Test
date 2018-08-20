@@ -6,8 +6,11 @@
     }
     .column.history {
         flex: 0 0 300px;
-        border-left: 1px solid #eee;
-        background: #FFF;
+
+        @media all and (max-width: 1024px)
+        {
+            display: none;
+        }
 
         h2 {
             padding: 0px 15px;
