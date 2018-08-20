@@ -18,7 +18,7 @@ export default class TestHistory extends Component {
         return (
             <div>
                 {
-                    this.props.history.map(function({test, index}) {
+                    this.props.history.map(function(test, index) {
                         return (
                             <div className="test" key={index}>
                                 <div className="title">{date}</div>
