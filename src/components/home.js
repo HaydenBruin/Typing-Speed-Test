@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 class Home extends Component {
 
     render() {
-        console.log(this.props.testHistory);
         return (
             <Fragment>
                 <div className="main columns">
