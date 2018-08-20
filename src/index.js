@@ -17,7 +17,7 @@ import rootReducer from "./reducers";
 
 // RENDER
 ReactDOM.render(
-    <Provider store={createStore(rootReducer)}>
+    <Provider store={createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
         <Home />
     </Provider>,
 document.getElementById('root'));
