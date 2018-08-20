@@ -1,7 +1,8 @@
 import React, { Fragment, Component } from 'react';
 import TypingTest from "./typing-test";
+import TestHistory from "./test-history";
 import Icon from "./icon";
-import { createStore } from 'redux';
+import { connect } from 'react-redux';
 
 class Home extends Component {
 
@@ -19,18 +20,7 @@ class Home extends Component {
                     <div className="column history">
                         <h2>Test Feed</h2>
                         <div className="tests">
-                            <div className="test">
-                                <div className="title">4:27pm - August 17th</div>
-                                <div className="desc">10 correct - 2 wrong</div>
-                            </div>
-                            <div className="test">
-                                <div className="title">4:22pm - August 17th</div>
-                                <div className="desc">14 correct - 1 wrong</div>
-                            </div>
-                            <div className="test">
-                                <div className="title">4:18pm - August 17th</div>
-                                <div className="desc">4 correct - 0 wrong</div>
-                            </div>
+                            { this.props.testHistory && <TestHistory history={this.props.testHistory} /> }
                         </div>
                     </div>
                 </div>
@@ -43,4 +33,9 @@ class Home extends Component {
     }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+    testHistory: state.testHistory.tests
+})
+
+export default connect(mapStateToProps)(Home)
+

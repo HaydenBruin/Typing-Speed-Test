@@ -1,15 +1,15 @@
 const initialState = {
-    testHistory: []
+    tests: []
 }
 
-export default testHistory = (state = initialState, action) => {
+export default (state = initialState, action) => {
     switch(action.type)
     {
         case 'UPDATE_TESTHISTORY':
             return {
                 ...state,
-                testHistory: [
-                    ...state.testHistory,
+                tests: [
+                    ...state.tests,
                     { correct: action.correct, wrong: action.wrong }
                 ]
             }

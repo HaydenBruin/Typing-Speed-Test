@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { createStore} from 'redux';
 
 // LOAD SERVICE WORKERS
 import registerServiceWorker from './registerServiceWorker';
@@ -17,7 +17,7 @@ import rootReducer from "./reducers";
 
 // RENDER
 ReactDOM.render(
-    <Provider store={rootReducer}>
+    <Provider store={createStore(rootReducer)}>
         <Home />
     </Provider>,
 document.getElementById('root'));

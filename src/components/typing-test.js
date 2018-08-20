@@ -1,4 +1,5 @@
-import React, { Fragment, Component } from 'react'
+import React, { Fragment, Component } from 'react';
+import { updateTestHistory } from "../actions/test-history";
 
 export default class TypingTest extends Component {
     // WORDS
@@ -120,6 +121,8 @@ export default class TypingTest extends Component {
             startedTest: false,
             finishedTest: true
         })
+
+        store.dispatch(updateTestHistory(this.state.answers.correct, this.state.answers.wrong))
     }
 
 
